@@ -1,0 +1,5 @@
+com\sliit\webservice\application\UserApplication.class
+com\sliit\webservice\dao\UserDAO.class
+com\sliit\webservice\repository\UserRepository.class
+com\sliit\webservice\controller\UserController.class
+com\sliit\webservice\model\User.class
