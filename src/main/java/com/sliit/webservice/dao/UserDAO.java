@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sliit.webservice.exception.ResourceNotFoundException;
 import com.sliit.webservice.model.User;
 import com.sliit.webservice.repository.UserRepository;
 
@@ -28,12 +29,12 @@ public class UserDAO {
 	}
 
 	/* GET AN USER */
-	public User findOne(Long empId) {
+	public User findOne(Long empId) throws ResourceNotFoundException {
 		Optional<User> op = userRepository.findById(empId);
 		if (op.isPresent()) {
 			return op.get();
 		} else {
-			return null;
+			throw new ResourceNotFoundException("User not found for this id :: " + empId);
 		}
 	}
 

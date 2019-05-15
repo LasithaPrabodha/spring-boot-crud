@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sliit.webservice.dao.UserDAO;
+import com.sliit.webservice.exception.ResourceNotFoundException;
 import com.sliit.webservice.model.User;
 
 @RestController
@@ -39,7 +40,7 @@ public class UserController {
 
 	/* GET USER BY ID */
 	@GetMapping("/users/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long empId) {
+	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long empId) throws ResourceNotFoundException{
 		User user = userDAO.findOne(empId);
 
 		if (user == null) {
@@ -51,7 +52,7 @@ public class UserController {
 	/* UPDATE AN USER BY ID */
 	@PutMapping("/users/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
-			@Valid @RequestBody User userDetails) {
+			@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
 
 		User user = userDAO.findOne(userId);
 
@@ -70,7 +71,7 @@ public class UserController {
 
 	/* DELETE AN USER */
 	@DeleteMapping("/users/{id}")
-	public ResponseEntity<User> deleteUser(@PathVariable(value = "id") Long userID) {
+	public ResponseEntity<User> deleteUser(@PathVariable(value = "id") Long userID) throws ResourceNotFoundException {
 		User user = userDAO.findOne(userID);
 		if (user == null) {
 			return ResponseEntity.notFound().build();
