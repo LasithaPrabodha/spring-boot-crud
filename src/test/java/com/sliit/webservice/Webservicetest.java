@@ -31,7 +31,7 @@ public class Webservicetest {
 	UserDAO userDAO;
 
 	@Test
-	public void contextLoads() throws Exception {
+	public void allUsersLoad() throws Exception {
 
 		Mockito.when(userDAO.findAll()).thenReturn(Collections.emptyList());
 
